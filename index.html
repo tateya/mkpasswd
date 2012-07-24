@@ -1,0 +1,18 @@
+<!doctype html>
+<meta charset="UTF-8">
+<noscript>
+  <meta content="0;URL=https://mkpw.herokuapp.com/cgi-bin/mkpasswd" http-equiv="refresh">
+</noscript>
+<title>mkpasswd</title>
+<script>
+(function() {
+  'use strict';
+
+  window.addEventListener('DOMContentLoaded', main);
+
+  function main() {
+    var n = Math.floor(Math.random() * 100);
+    location.href = 'https://mkpw.herokuapp.com/cgi-bin/mkpasswd?' + n;
+  }
+})();
+</script>
