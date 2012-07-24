@@ -1,0 +1,18 @@
+#!/bin/sh
+
+n=${QUERY_STRING:-16}
+passwd=$(cat /dev/urandom | tr -c -d '[:alnum:]' | head -c ${n})
+body=$(if test "$(echo -n "${HTTP_ACCEPT_ENCODING}" | grep gzip)"; \
+  then echo -n $(echo -n ${passwd} | gzip -c); \
+  else echo -n ${passwd}; \
+fi)
+length=$(echo -n ${body} | wc -c)
+
+echo "Access-Control-Allow-Origin: *"
+echo "Cache-Control: no-cache"
+echo "Connection: close"
+echo "Content-Language: en"
+echo "Content-Length: ${length}"
+echo "Content-Type: text/plain; charset=UTF-8"
+echo
+echo -n ${body}
